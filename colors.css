@@ -1,0 +1,8 @@
+body {
+  --tre-selection-color: green;
+  --tre-secondary-selection-color: yellow;
+  font-family: sans-serif;
+}
+.pane {
+  background: #eee;
+}

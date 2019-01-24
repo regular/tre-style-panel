@@ -1,0 +1,23 @@
+body, html, .tre-images-demo {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-size: 18px;
+}
+.tre-finder .summary select {
+  font-size: 9pt;
+  background: transparent;
+  border: none;
+  width: 50px;
+}
+.tre-finder summary {
+  white-space: nowrap;
+}
+.tre-finder summary:focus {
+  outline: 1px solid rgba(255,255,255,0.1);
+}
+.tre-styles-editor {
+  max-width: 500px;
+}
