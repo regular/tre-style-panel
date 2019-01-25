@@ -8,6 +8,12 @@ const {makePane, makeDivider, makeSplitPane} = require('tre-split-pane')
 
 //require('brace/theme/twilight')
 
+setStyle(`
+  body, .tre-stylepane-demo {
+    height: 100%;
+  }
+`)
+
 client( (err, ssb, config) => {
   if (err) return console.error(err)
 
@@ -23,13 +29,19 @@ client( (err, ssb, config) => {
   })
 
   document.body.appendChild(h('.tre-stylepane-demo', [
-    makeSplitPane({horiz: false}, [
-      makePane('40%', [
-        renderFinder(config.tre.branches.root, {path: []})
+    makeSplitPane({horiz: true}, [
+      makePane('20%', [
+        makeSplitPane({horiz: false}, [
+          makePane('40%', [
+            renderFinder(config.tre.branches.root, {path: []})
+          ]),
+          makeDivider(),
+          makePane('40%', [
+            renderPanel()
+          ])
+        ])
       ]),
-      makeDivider(),
-      makePane('40%', [
-        renderPanel()
+      makePane('70%', [
       ])
     ])
   ]))
