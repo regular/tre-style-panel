@@ -32,10 +32,17 @@ module.exports = function(ssb, opts) {
     const abort = drain.abort
     const resolved = MutantMap(sheets, resolvePrototypes, {comparer})
 
-    return h('ul', {
+    return h('.tre-style-panel', {
       hooks: [el => abort],
     }, MutantMap(resolved, kvm => {
-      return h('li', renderEditor(kvm()))
+      const hasCss = computed(kvm, kvm => Boolean(kvm && kvm.value.content.css))
+      const isOpen = Value(false)
+      return computed(hasCss, c => !c ? [] : h('details.stylesheet', {
+        'ev-toggle': e => isOpen.set(!isOpen())
+      }, [
+        h('summary', computed(kvm, kvm => kvm && kvm.value.content.name)),
+        computed(isOpen, o => !o ? renderStyle(kvm(), {where: 'stage'}) : renderEditor(kvm()))
+      ]))
     }, {comparer}))
   }
 

@@ -32,15 +32,16 @@ client( (err, ssb, config) => {
     makeSplitPane({horiz: true}, [
       makePane('20%', [
         makeSplitPane({horiz: false}, [
-          makePane('40%', [
+          makePane('50%', [
             renderFinder(config.tre.branches.root, {path: []})
           ]),
           makeDivider(),
-          makePane('40%', [
+          makePane('50%', [
             renderPanel()
           ])
         ])
       ]),
+      makeDivider(),
       makePane('70%', [
       ])
     ])
