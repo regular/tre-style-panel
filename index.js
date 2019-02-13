@@ -36,8 +36,9 @@ module.exports = function(ssb, opts) {
       hooks: [el => abort],
     }, MutantMap(resolved, kvm => {
       const hasCss = computed(kvm, kvm => Boolean(kvm && kvm.value.content.css))
+      const ignored = computed(kvm, kvm => opts.isIgnored && opts.isIgnored(kvm))
       const isOpen = Value(false)
-      return computed(hasCss, c => !c ? [] : h('details.stylesheet', {
+      return computed([ignored, hasCss], (i, c) => (!c || i) ? [] : h('details.stylesheet', {
         'ev-toggle': e => isOpen.set(!isOpen())
       }, [
         h('summary', computed(kvm, kvm => kvm && kvm.value.content.name)),
