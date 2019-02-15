@@ -11,6 +11,7 @@ const computed = require('mutant/computed')
 const ResolvePrototypes = require('tre-prototypes')
 
 module.exports = function(ssb, opts) {
+  opts = opts || {}
   const resolvePrototypes = ResolvePrototypes(ssb)
 
   const renderShell = Shell(ssb, {
