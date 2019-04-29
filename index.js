@@ -36,6 +36,7 @@ module.exports = function(ssb, opts) {
     return h('.tre-style-panel', {
       hooks: [el => abort],
     }, MutantMap(resolved, kvm => {
+      if (!kvm) return []
       const hasCss = computed(kvm, kvm => Boolean(kvm && kvm.value.content.css))
       const ignored = computed(kvm, kvm => opts.isIgnored && opts.isIgnored(kvm))
       const isOpen = Value(false)
