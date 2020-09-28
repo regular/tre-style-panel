@@ -25,12 +25,23 @@ module.exports = function(ssb, opts) {
   return function() {
     const sheets = MutantArray()
     const o = {sync: true, live: true}
-    const drain = collectMutations(sheets, o)
-    pull(
-      ssb.revisions.messagesByType('stylesheet', o),
-      drain
-    )
-    const abort = drain.abort
+    let drain
+    function stream() {
+      sheets.clear()
+      pull(
+        ssb.revisions.messagesByType('stylesheet', o),
+        drain = collectMutations(sheets, o, err => {
+          if (!err) return
+          const delay = err.pleaseRetryIn
+          if (delay !== undefined) {
+            return setTimeout(stream, delay)
+          }
+          console.error('tre-style-panel error: %s', err.message)
+        })
+      )
+    }
+    stream()
+    const abort = ()=>drain.abort()
     const resolved = MutantMap(sheets, resolvePrototypes, {comparer})
 
     return h('.tre-style-panel', {
