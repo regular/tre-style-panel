@@ -1,11 +1,15 @@
 const Styles = require('tre-stylesheets')
-const Panel = require('./panel')
+const Accordion = require('tre-editor-accordion')
 
 module.exports = function(ssb, opts) {
   opts = opts || {}
 
   function source(opts) {
     return ssb.revisions.messagesByType('stylesheet', opts)
+  }
+  function rename(kvm, newContent, newName) {
+    newContent.name = newName
+    return newContent
   }
 
   function isIgnored(kvm) {
@@ -16,5 +20,5 @@ module.exports = function(ssb, opts) {
     return false
   }
 
-  return Panel(ssb, source, Styles(ssb, opts), Object.assign({}, opts, {isIgnored}))
+  return Accordion(ssb, source, Styles(ssb, opts), Object.assign({}, opts, {isIgnored, rename}))
 }

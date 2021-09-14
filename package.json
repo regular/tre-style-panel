@@ -60,6 +60,7 @@
     "module-styles": "^1.0.0",
     "mutant": "^3.29.0",
     "pull-stream": "^3.6.14",
+    "tre-editor-accordion": "^1.0.0",
     "tre-editor-shell": "^1.6.1",
     "tre-string": "^1.0.1",
     "tre-stylesheets": "^1.3.4"
