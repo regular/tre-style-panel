@@ -1,6 +1,6 @@
 {
   "name": "tre-style-panel",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Edit syle sheets and watch the effect in realtime",
   "main": "index.js",
   "scripts": {
