@@ -19,6 +19,10 @@ module.exports = function(ssb, opts) {
     if (opts.isIgnored && opts.isIgnored(kvm)) return true
     return false
   }
-
-  return Accordion(ssb, source, Styles(ssb, opts), Object.assign({}, opts, {isIgnored, rename}))
+  const renderAccordion = Accordion(ssb, source, Styles(ssb, opts), Object.assign({}, opts, {isIgnored, rename}))
+  return function render() {
+    const el = renderAccordion()
+    el.classList.add('tre-style-panel')
+    return el
+  }
 }
